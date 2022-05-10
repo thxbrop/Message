@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/fragment_message_appbar_layout"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:background="@color/surface"
+        android:transitionName="item_root"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0">
+
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/fragment_message_toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:navigationIcon="@drawable/ic_baseline_arrow_back_24">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal">
+
+                <com.google.android.material.imageview.ShapeableImageView
+                    android:id="@+id/fragment_message_toolbar_image"
+                    android:layout_width="42dp"
+                    android:layout_height="42dp"
+                    android:background="@color/primary"
+                    android:transitionName="item_image"
+                    app:shapeAppearanceOverlay="@style/ShapeableImageView_Round" />
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="@dimen/margin_m"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/fragment_message_toolbar_title"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/fragment_message_title"
+                        android:textColor="@color/textColor"
+                        android:textSize="@dimen/font_m"
+                        android:textStyle="bold"
+                        android:transitionName="item_title" />
+
+                    <TextView
+                        android:id="@+id/fragment_message_toolbar_subtitle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/fragment_message_subtitle"
+                        android:textSize="@dimen/font_s"
+                        android:textStyle="bold" />
+                </LinearLayout>
+
+                <ImageView
+                    style="@style/Widget.AppCompat.Toolbar.Button.Navigation"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="end|center_vertical"
+                    android:contentDescription="@string/fragment_message_toolbar_cd_more"
+                    android:src="@drawable/ic_baseline_more_vert_24" />
+            </LinearLayout>
+        </androidx.appcompat.widget.Toolbar>
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <View
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="@color/backgroundSecondary"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/fragment_message_appbar_layout" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/fragment_message_recyclerview"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        app:layout_constraintBottom_toTopOf="@id/fragment_message_bottom_sheet"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/fragment_message_appbar_layout"
+        app:layout_constraintVertical_bias="1"
+        app:reverseLayout="true"
+        tools:itemCount="3"
+        tools:listitem="@layout/item_message" />
+
+    <LinearLayout
+        android:id="@+id/fragment_message_bottom_sheet"
+        android:layout_width="0dp"
+        android:layout_height="?attr/actionBarSize"
+        android:background="@color/surface"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <ImageButton
+            android:id="@+id/fragment_message_bottom_sheet_emoji"
+            style="@style/Widget.AppCompat.Toolbar.Button.Navigation"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/margin_s"
+            android:contentDescription="@string/fragment_message_bottom_sheet_emoji"
+            android:src="@drawable/ic_baseline_emoji_emotions_24" />
+
+        <EditText
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:autofillHints="username"
+            android:imeOptions="actionSend"
+            android:inputType="none"
+            android:lines="1"
+            android:textColorHighlight="@color/secondary"
+            android:textColorHint="@color/onSecondary"
+            android:textCursorDrawable="@drawable/widget_text_cursor"
+            android:theme="@style/MessageFragment.EditText" />
+
+        <Button
+            android:id="@+id/fragment_message_bottom_sheet_send"
+            style="@style/Widget.MaterialComponents.Button.TextButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/margin_s"
+            android:text="@string/fragment_message_bottom_sheet_send" />
+    </LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

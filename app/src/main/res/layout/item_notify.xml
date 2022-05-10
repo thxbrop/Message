@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/item_message_item_view"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/bg_item_notify">
+
+    <View
+        android:id="@+id/item_notify_divider"
+        android:layout_width="0dp"
+        android:layout_height="1dp"
+        android:background="@color/divider"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0" />
+
+    <com.google.android.material.imageview.ShapeableImageView
+        android:id="@+id/item_notify_image"
+        android:layout_width="0dp"
+        android:layout_height="48dp"
+        android:layout_marginVertical="@dimen/margin_xs"
+        android:layout_marginStart="@dimen/margin_m"
+        android:src="@color/primary"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintDimensionRatio="h,1:1"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/item_notify_divider"
+        app:shapeAppearance="@style/ShapeableImageView_Round" />
+
+    <TextView
+        android:id="@+id/item_notify_title"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="@dimen/margin_m"
+        android:ellipsize="end"
+        android:lines="1"
+        android:text="@string/item_notify_title"
+        android:textColor="@color/textColor"
+        android:textSize="@dimen/font_m"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@id/item_notify_image"
+        app:layout_constraintEnd_toStartOf="@id/item_notify_time"
+        app:layout_constraintHorizontal_bias="0"
+        app:layout_constraintStart_toEndOf="@id/item_notify_image"
+        app:layout_constraintTop_toTopOf="@id/item_notify_image"
+        app:layout_constraintVertical_bias="0" />
+
+    <TextView
+        android:id="@+id/item_notify_subtitle"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="@dimen/margin_m"
+        android:ellipsize="end"
+        android:lines="1"
+        android:text="@string/item_notify_subtitle"
+        android:textSize="@dimen/font_s"
+        app:layout_constraintBottom_toBottomOf="@id/item_notify_image"
+        app:layout_constraintEnd_toStartOf="@id/item_notify_unread"
+        app:layout_constraintHorizontal_bias="0"
+        app:layout_constraintStart_toEndOf="@id/item_notify_image"
+        app:layout_constraintTop_toBottomOf="@id/item_notify_title"
+        app:layout_constraintVertical_bias="0.8" />
+
+    <TextView
+        android:id="@+id/item_notify_time"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="@dimen/margin_m"
+        android:text="@string/item_notify_time"
+        android:textSize="@dimen/font_s"
+        app:layout_constraintBottom_toBottomOf="@id/item_notify_title"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@id/item_notify_title" />
+
+    <TextView
+        android:id="@+id/item_notify_unread"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/shape_round"
+        android:padding="@dimen/margin_xxs"
+        android:text="@string/item_notify_unread"
+        android:textColor="@color/onPrimary"
+        android:textSize="@dimen/font_xs"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@id/item_notify_subtitle"
+        app:layout_constraintEnd_toEndOf="@id/item_notify_time"
+        app:layout_constraintHorizontal_bias="1"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@id/item_notify_subtitle" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:icon="@drawable/ic_baseline_videocam_24"
+        android:title="@string/menu_fragment_notify_detail_videocam"
+        app:showAsAction="always" />
+    <item
+        android:icon="@drawable/ic_baseline_call_24"
+        android:title="@string/menu_fragment_notify_detail_call"
+        app:showAsAction="always" />
+    <item
+        android:icon="@drawable/ic_baseline_share_24"
+        android:title="@string/menu_fragment_notify_detail_share"
+        app:showAsAction="ifRoom" />
+    <item
+        android:icon="@drawable/ic_baseline_delete_24"
+        android:title="@string/menu_fragment_notify_detail_delete"
+        app:showAsAction="ifRoom" />
+</menu>

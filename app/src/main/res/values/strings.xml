@@ -1,0 +1,35 @@
+<resources>
+    <string name="app_name">Message</string>
+    <string name="fragment_login_text_input_layout_hint">手机号码</string>
+    <string name="fragment_login_title">你的手机号码</string>
+    <string name="fragment_login_checkbox">同步通讯录</string>
+    <string name="fragment_login_button">国家</string>
+    <string name="fragment_login_subtitle">请确认您的国家代码并输入您的手机号码</string>
+    <string name="fragment_login_toolbar_cd_more">更多</string>
+    <string name="fragment_login_floating">下一步</string>
+    <string name="number_1">1</string>
+    <string name="item_number_button_sub">ABC</string>
+    <string name="fragment_notify_toolbar_cd_search">搜索</string>
+    <string name="fragment_notify_tab_chat">Chat</string>
+    <string name="fragment_notify_tab_group">Group</string>
+    <string name="fragment_notify_tab_notify">Notify</string>
+    <string name="item_notify_title">Durov\'s Channel</string>
+    <string name="item_notify_subtitle">Thought from the Product Manager / CEO / Founder of Telegram.</string>
+    <string name="item_notify_time">PM 1:16</string>
+    <string name="item_notify_unread">108</string>
+    <string name="item_message_title">Durov</string>
+    <string name="item_message_subtitle">Thought from the Product Manager / CEO / Founder of Telegram.</string>
+    <string name="fragment_message_title">Durov</string>
+    <string name="fragment_message_subtitle">在线</string>
+    <string name="fragment_message_toolbar_cd_more">更多</string>
+    <string name="fragment_message_bottom_sheet_emoji">表情</string>
+    <string name="fragment_message_bottom_sheet_send">发送</string>
+    <string name="menu_fragment_notify_detail_videocam">视频通话</string>
+    <string name="menu_fragment_notify_detail_call">语音通话</string>
+    <string name="menu_fragment_notify_detail_share">分享联系人</string>
+    <string name="menu_fragment_notify_detail_delete">删除联系人</string>
+    <string name="fragment_notify_detail_title">Durov</string>
+    <string name="fragment_notify_detail_subtitle">Thought from the Product Manager / CEO / Founder of Telegram</string>
+    <string name="fragment_user_image">头像</string>
+    <string name="fragment_user_toolbar_more">更多</string>
+</resources>

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="ShapeableImageView_Round">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">50%</item>
+    </style>
+
+    <style name="MessageFragment.EditText" parent="Widget.AppCompat.EditText">
+        <item name="colorControlNormal">@android:color/transparent</item>
+        <item name="colorControlActivated">@android:color/transparent</item>
+    </style>
+</resources>
