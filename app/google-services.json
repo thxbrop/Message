@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "493330821994",
+    "project_id": "message-1fa62",
+    "storage_bucket": "message-1fa62.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:493330821994:android:4153141ac0ee7f74d92b13",
+        "android_client_info": {
+          "package_name": "com.thxbrop.message"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "493330821994-k62fm17k83ubbmnkao85el69egg3227s.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCDRwQrAfOy_VOkuE_AZAak9_yz5n67jkQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "493330821994-k62fm17k83ubbmnkao85el69egg3227s.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -5,10 +5,14 @@ import com.thxbrop.message.Contracts
 import com.thxbrop.message.application
 import com.thxbrop.message.data.local.AppDatabase
 import com.thxbrop.message.data.local.repository.MockAccountRepository
+import com.thxbrop.message.data.local.repository.MockNotifyRepository
 import com.thxbrop.message.data.local.storage.LocalStorage
 import com.thxbrop.message.data.remote.AccountService
+import com.thxbrop.message.data.remote.NotifyService
 import com.thxbrop.message.domain.repository.AccountRepository
 import com.thxbrop.message.domain.repository.AccountRepositoryImpl
+import com.thxbrop.message.domain.repository.NotifyRepository
+import com.thxbrop.message.domain.repository.NotifyRepositoryImpl
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -31,13 +35,24 @@ object AppModule {
                     .addHeader("", "")
                     .build()
                 it.withReadTimeout(5, TimeUnit.SECONDS)
-                it.proceed(request)
+                    .proceed(request)
             }.build()
     }
 
     @Provides
     @Singleton
     fun provideAccountService(): AccountService {
+        return Retrofit.Builder()
+            .baseUrl(Contracts.BASE_URL)
+            .client(retrofitClient())
+            .addConverterFactory(GsonConverterFactory.create())
+            .build()
+            .create()
+    }
+
+    @Provides
+    @Singleton
+    fun provideNotifyService(): NotifyService {
         return Retrofit.Builder()
             .baseUrl(Contracts.BASE_URL)
             .client(retrofitClient())
@@ -60,7 +75,7 @@ object AppModule {
     @Singleton
     fun provideStorage(): LocalStorage {
         return LocalStorage(
-            conversationDao = provideDatabase().conversationDao(),
+            notifyDao = provideDatabase().notifyDao(),
             userDao = provideDatabase().userDao()
         )
     }
@@ -72,9 +87,20 @@ object AppModule {
         else AccountRepositoryImpl(
             accountService = provideAccountService(),
             localStorage = LocalStorage(
-                conversationDao = provideDatabase().conversationDao(),
+                notifyDao = provideDatabase().notifyDao(),
                 userDao = provideDatabase().userDao()
             )
+        )
+    }
+
+    @Provides
+    @Singleton
+    fun provideNotifyRepository(): NotifyRepository {
+        return if (Contracts.MOCK_ENABLE) MockNotifyRepository()
+        else NotifyRepositoryImpl(
+            notifyService = provideNotifyService(),
+            notifyDao = provideDatabase().notifyDao(),
+            notifyDetailDao = provideDatabase().notifyDetailDao()
         )
     }
 }

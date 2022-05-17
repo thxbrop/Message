@@ -1,7 +1,8 @@
 package com.thxbrop.message.domain.repository
 
-import com.thxbrop.message.domain.model.Conversation
+import com.thxbrop.message.domain.model.Notify
 
 interface AccountRepository {
-    suspend fun getConversations(): List<Conversation>
+    suspend fun getNotifies(): List<Notify>
+    suspend fun loginByMobilePhoneNumber(phoneNumber: Long, code: Long): String
 }

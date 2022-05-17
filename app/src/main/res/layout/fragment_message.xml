@@ -94,7 +94,7 @@
         app:layout_constraintVertical_bias="1"
         app:reverseLayout="true"
         tools:itemCount="3"
-        tools:listitem="@layout/item_message" />
+        tools:listitem="@layout/item_message_in" />
 
     <LinearLayout
         android:id="@+id/fragment_message_bottom_sheet"

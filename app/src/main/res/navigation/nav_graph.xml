@@ -23,7 +23,7 @@
             app:enterAnim="@anim/enter_from_end_little"
             app:exitAnim="@anim/nav_default_exit_anim"
             app:popEnterAnim="@anim/nav_default_pop_enter_anim"
-            app:popExitAnim="@anim/leave_from_end"  />
+            app:popExitAnim="@anim/leave_from_end" />
     </fragment>
     <fragment
         android:id="@+id/messageFragment"
@@ -42,11 +42,23 @@
         android:id="@+id/notifyDetailFragment"
         android:name="com.thxbrop.message.presentation.notify_detail.NotifyDetailFragment"
         android:label="NotifyDetailFragment"
-        tools:layout="@layout/fragment_notify_detail">
-    </fragment>
+        tools:layout="@layout/fragment_notify_detail" />
     <fragment
         android:id="@+id/loginFragment"
         android:name="com.thxbrop.message.presentation.login.LoginFragment"
         android:label="LoginFragment"
-        tools:layout="@layout/fragment_login" />
+        tools:layout="@layout/fragment_login">
+        <action
+            android:id="@+id/action_loginFragment_to_codeFragment"
+            app:destination="@id/codeFragment"
+            app:enterAnim="@anim/enter_from_end_little"
+            app:exitAnim="@anim/nav_default_exit_anim"
+            app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+            app:popExitAnim="@anim/leave_from_end" />
+    </fragment>
+    <fragment
+        android:id="@+id/codeFragment"
+        android:name="com.thxbrop.message.presentation.code.CodeFragment"
+        android:label="CodeFragment"
+        tools:layout="@layout/fragment_code" />
 </navigation>

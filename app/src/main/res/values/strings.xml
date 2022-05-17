@@ -4,7 +4,7 @@
     <string name="fragment_login_title">你的手机号码</string>
     <string name="fragment_login_checkbox">同步通讯录</string>
     <string name="fragment_login_button">国家</string>
-    <string name="fragment_login_subtitle">请确认您的国家代码并输入您的手机号码</string>
+    <string name="fragment_login_subtitle">请确认您的 <b>国家代码</b> 并输入您的手机号码</string>
     <string name="fragment_login_toolbar_cd_more">更多</string>
     <string name="fragment_login_floating">下一步</string>
     <string name="number_1">1</string>
@@ -32,4 +32,11 @@
     <string name="fragment_notify_detail_subtitle">Thought from the Product Manager / CEO / Founder of Telegram</string>
     <string name="fragment_user_image">头像</string>
     <string name="fragment_user_toolbar_more">更多</string>
+    <string name="def_value">-</string>
+    <string name="dialog_alert_negative">编辑</string>
+    <string name="dialog_alert_positive">是</string>
+    <string name="dialog_alert_title">此手机号码正确吗?</string>
+    <string name="fragment_code_title">查看您的短信消息</string>
+    <string name="fragment_code_subtitle">We\'ve sent the code to your phone number.</string>
+    <string name="fragment_login_illegal_phone">手机号码格式不正确</string>
 </resources>

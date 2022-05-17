@@ -5,9 +5,9 @@
 
     <color name="background">#FFFBFE</color>
     <color name="backgroundSecondary">#f6f6f6</color>
-    <color name="primary">#6750A4</color>
+    <color name="primary">#867cd2</color>
     <color name="primaryContainer">#EADDFF</color>
-    <color name="secondary">#625B71</color>
+    <color name="secondary">@color/primary</color>
     <color name="secondaryContainer">#E8DEF8</color>
     <color name="tertiary">#7D5260</color>
     <color name="tertiaryContainer">#FFD8E4</color>
@@ -34,6 +34,36 @@
     <color name="inverseOnSurface">#F4EFF4</color>
     <color name="inversePrimary">#D0BCFF</color>
 
-    <color name="divider">#eaeaea</color>
+    <color name="divider">#e6e6e6</color>
     <color name="link">#3490de</color>
+    <color name="chat_in_bubble">#f0eff0</color>
+    <color name="chat_out_bubble">#5b8edf</color>
+    <color name="chat_inBubbleSelected">#eaeaea</color>
+    <color name="chat_inBubbleShadow">#322f4e</color>
+    <color name="chat_outBubbleGradient">#51b5cc</color>
+    <color name="chat_outBubbleGradient2">#fe0101</color>
+    <color name="chat_outBubbleGradient3">#fe0101</color>
+    <color name="chat_outBubbleSelected">#6587ce</color>
+    <color name="chat_outBubbleShadow">#223a68</color>
+    <color name="chat_messageTextIn">#010101</color>
+    <color name="chat_messageTextOut">#ffffff</color>
+    <color name="chat_outSentCheck">#ffffff</color>
+    <color name="chat_outSentCheckRead">#fefefe</color>
+
+    <color name="switchTracker">#b4b3b9</color>
+    <color name="switchTrackerChecked">#7e7ae8</color>
+    <color name="radioBackground">#b3b3b3</color>
+
+    <color name="radioBackgroundChecked">#6a6ae6</color>
+
+    <color name="actionBarDefault">#ffffff</color>
+    <color name="actionBarDefaultIcon">#474753</color>
+    <color name="actionBarDefaultTitle">#333333</color>
+    <color name="actionBarDefaultSelector">#2e2d33</color>
+    <color name="actionBarDefaultSubmenuBackground">#ffffff</color>
+    <color name="actionBarDefaultSubmenuItem">#222222</color>
+    <color name="actionBarDefaultSubmenuItemIcon">#6a696f</color>
+    <color name="player_progressBackground">#ededef</color>
+    <color name="player_progress">#6a6ce7</color>
+
 </resources>
