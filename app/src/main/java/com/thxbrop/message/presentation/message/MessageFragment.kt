@@ -62,7 +62,7 @@ class MessageFragment : Fragment(), PageController<Message> {
                     val binding = ItemMessageInBinding.bind(itemView)
                     val model = getModel<Message>()
                     with(binding) {
-                        itemMessageTitle.text = model.createdAt.toString()
+                        itemMessageTitle.text = model.timestamp.toString()
                         itemMessageSubtitle.text = model.content
                     }
                 }

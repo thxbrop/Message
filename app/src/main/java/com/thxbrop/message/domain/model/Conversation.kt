@@ -4,8 +4,9 @@ import androidx.room.Entity
 import androidx.room.PrimaryKey
 
 @Entity
-data class User(
+data class Conversation(
     val name: String,
-    val email: String,
-    @PrimaryKey val id: Int
+    val creatorId: Int,
+    @PrimaryKey val id: Int,
 )
+

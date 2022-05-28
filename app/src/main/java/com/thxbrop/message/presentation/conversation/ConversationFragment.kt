@@ -1,4 +1,4 @@
-package com.thxbrop.message.presentation.notify
+package com.thxbrop.message.presentation.conversation
 
 import android.graphics.Typeface
 import android.os.Bundle
@@ -10,33 +10,31 @@ import android.widget.Toast
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.drake.brv.utils.linear
 import com.drake.brv.utils.models
 import com.drake.brv.utils.setup
 import com.thxbrop.message.R
 import com.thxbrop.message.Resource
-import com.thxbrop.message.databinding.FragmentNotifyBinding
-import com.thxbrop.message.databinding.ItemNotifyBinding
-import com.thxbrop.message.domain.model.Notify
+import com.thxbrop.message.databinding.FragmentConversationBinding
+import com.thxbrop.message.databinding.ItemConversationBinding
+import com.thxbrop.message.domain.model.Conversation
 import com.thxbrop.message.extensions.setTextColorResource
 import com.thxbrop.message.presentation.PageController
 import com.thxbrop.message.presentation.message.MessageFragment
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.flow.collectLatest
 
 @AndroidEntryPoint
-class NotifyFragment : Fragment(), PageController<Notify> {
-    private lateinit var binding: FragmentNotifyBinding
-    private val viewModel by viewModels<NotifyViewModel>()
+class ConversationFragment : Fragment(), PageController<Conversation> {
+    private lateinit var binding: FragmentConversationBinding
+    private val viewModel by viewModels<ConversationViewModel>()
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        binding = FragmentNotifyBinding.inflate(inflater, container, false)
+        binding = FragmentConversationBinding.inflate(inflater, container, false)
         return binding.root
     }
 
@@ -54,29 +52,29 @@ class NotifyFragment : Fragment(), PageController<Notify> {
                 findNavController().navigate(R.id.action_notifyFragment_to_loginFragment)
             }
             fragmentNotifyRecyclerview.linear().setup {
-                addType<Notify>(R.layout.item_notify)
-                var binding: ItemNotifyBinding
+                addType<Conversation>(R.layout.item_conversation)
+                var binding: ItemConversationBinding
                 onBind {
-                    val notify = getModel<Notify>()
-                    binding = ItemNotifyBinding.bind(itemView)
+                    val notify = getModel<Conversation>()
+                    binding = ItemConversationBinding.bind(itemView)
                     with(binding) {
                         itemNotifyTitle.text = notify.name
                     }
                 }
                 onClick(R.id.item_message_item_view) {
-                    binding = ItemNotifyBinding.bind(itemView)
-                    val notify = getModel<Notify>()
+                    binding = ItemConversationBinding.bind(itemView)
+                    val conversation = getModel<Conversation>()
                     findNavController().navigate(
                         R.id.action_notifyFragment_to_messageFragment,
                         bundleOf(
-                            MessageFragment.BUNDLE_NOTIFY_ID to notify.id,
+                            MessageFragment.BUNDLE_NOTIFY_ID to conversation.id,
                         )
                     )
                 }
                 onLongClick(R.id.item_message_item_view) {
                     Toast.makeText(
                         requireContext(),
-                        getModel<Notify>().name,
+                        getModel<Conversation>().name,
                         Toast.LENGTH_SHORT
                     ).show()
                 }
@@ -85,22 +83,20 @@ class NotifyFragment : Fragment(), PageController<Notify> {
 
 
         with(viewModel) {
-            lifecycleScope.launchWhenStarted {
-                conversationsFlow.collectLatest { resource ->
-                    when (resource) {
-                        Resource.Loading -> {
-                            Toast.makeText(requireContext(), "Loading", Toast.LENGTH_SHORT).show()
-                        }
-                        is Resource.Success -> {
-                            submitList(resource.data)
-                        }
-                        is Resource.Failure -> {
-                            Toast.makeText(
-                                requireContext(),
-                                resource.exception.message,
-                                Toast.LENGTH_SHORT
-                            ).show()
-                        }
+            conversationLiveData.observe(viewLifecycleOwner) { resource ->
+                when (resource) {
+                    Resource.Loading -> {
+                        Toast.makeText(requireContext(), "Loading", Toast.LENGTH_SHORT).show()
+                    }
+                    is Resource.Success -> {
+                        submitList(resource.data)
+                    }
+                    is Resource.Failure -> {
+                        Toast.makeText(
+                            requireContext(),
+                            resource.message,
+                            Toast.LENGTH_SHORT
+                        ).show()
                     }
                 }
             }
@@ -116,12 +112,12 @@ class NotifyFragment : Fragment(), PageController<Notify> {
         binding.fragmentNotifyToolbarTextSwitcher.setCurrentText(title)
     }
 
-    override fun submitList(list: List<Notify>) {
+    override fun submitList(list: List<Conversation>) {
         binding.fragmentNotifyRecyclerview.models = list
     }
 
     override fun onStart() {
         super.onStart()
-        viewModel.getNotifies()
+        viewModel.getConversations()
     }
 }

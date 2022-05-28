@@ -4,15 +4,15 @@ import androidx.room.Room
 import com.thxbrop.message.Contracts
 import com.thxbrop.message.application
 import com.thxbrop.message.data.local.AppDatabase
-import com.thxbrop.message.data.local.repository.MockAccountRepository
-import com.thxbrop.message.data.local.repository.MockNotifyRepository
-import com.thxbrop.message.data.local.storage.LocalStorage
-import com.thxbrop.message.data.remote.AccountService
-import com.thxbrop.message.data.remote.NotifyService
-import com.thxbrop.message.domain.repository.AccountRepository
-import com.thxbrop.message.domain.repository.AccountRepositoryImpl
-import com.thxbrop.message.domain.repository.NotifyRepository
-import com.thxbrop.message.domain.repository.NotifyRepositoryImpl
+import com.thxbrop.message.data.local.TokenManager
+import com.thxbrop.message.data.local.repository.MockConversationRepository
+import com.thxbrop.message.data.local.repository.MockUserRepository
+import com.thxbrop.message.data.remote.ConversationService
+import com.thxbrop.message.data.remote.UserService
+import com.thxbrop.message.domain.repository.ConversationRepository
+import com.thxbrop.message.domain.repository.ConversationRepositoryImpl
+import com.thxbrop.message.domain.repository.UserRepository
+import com.thxbrop.message.domain.repository.UserRepositoryImpl
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -28,20 +28,29 @@ import javax.inject.Singleton
 @InstallIn(SingletonComponent::class)
 object AppModule {
     @Singleton
-    private fun retrofitClient(): OkHttpClient {
-        return OkHttpClient.Builder()
-            .addInterceptor {
-                val request = it.request().newBuilder()
-                    .addHeader("", "")
-                    .build()
-                it.withReadTimeout(5, TimeUnit.SECONDS)
-                    .proceed(request)
-            }.build()
+    private fun retrofitClient(): OkHttpClient = run {
+        val builder = OkHttpClient.Builder()
+        var userId = ""
+        var token = ""
+        TokenManager.get { i, s ->
+            userId = (i ?: 0).toString()
+            token = s ?: ""
+        }
+        builder.addInterceptor {
+            val request = it.request().newBuilder()
+                .addHeader("userId", userId)
+                .addHeader("token", token)
+                .build()
+            it.withReadTimeout(5, TimeUnit.SECONDS)
+                .proceed(request)
+        }
+        builder.build()
     }
+
 
     @Provides
     @Singleton
-    fun provideAccountService(): AccountService {
+    fun provideUserService(): UserService {
         return Retrofit.Builder()
             .baseUrl(Contracts.BASE_URL)
             .client(retrofitClient())
@@ -52,7 +61,7 @@ object AppModule {
 
     @Provides
     @Singleton
-    fun provideNotifyService(): NotifyService {
+    fun provideConversationService(): ConversationService {
         return Retrofit.Builder()
             .baseUrl(Contracts.BASE_URL)
             .client(retrofitClient())
@@ -73,34 +82,21 @@ object AppModule {
 
     @Provides
     @Singleton
-    fun provideStorage(): LocalStorage {
-        return LocalStorage(
-            notifyDao = provideDatabase().notifyDao(),
+    fun provideConversationRepository(): ConversationRepository {
+        return if (Contracts.MOCK_ENABLE) MockConversationRepository()
+        else ConversationRepositoryImpl(
+            conversationService = provideConversationService(),
+            conversationDao = provideDatabase().conversationDao(),
+        )
+    }
+
+    @Provides
+    @Singleton
+    fun provideUserRepository(): UserRepository {
+        return if (Contracts.MOCK_ENABLE) MockUserRepository()
+        else UserRepositoryImpl(
+            userService = provideUserService(),
             userDao = provideDatabase().userDao()
-        )
-    }
-
-    @Provides
-    @Singleton
-    fun provideAccountRepository(): AccountRepository {
-        return if (Contracts.MOCK_ENABLE) MockAccountRepository()
-        else AccountRepositoryImpl(
-            accountService = provideAccountService(),
-            localStorage = LocalStorage(
-                notifyDao = provideDatabase().notifyDao(),
-                userDao = provideDatabase().userDao()
-            )
-        )
-    }
-
-    @Provides
-    @Singleton
-    fun provideNotifyRepository(): NotifyRepository {
-        return if (Contracts.MOCK_ENABLE) MockNotifyRepository()
-        else NotifyRepositoryImpl(
-            notifyService = provideNotifyService(),
-            notifyDao = provideDatabase().notifyDao(),
-            notifyDetailDao = provideDatabase().notifyDetailDao()
         )
     }
 }

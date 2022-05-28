@@ -15,7 +15,7 @@ interface MessageDao {
     @Delete
     suspend fun delete(vararg message: Message)
 
-    @Query("SELECT * FROM Message ORDER BY createdAt")
+    @Query("SELECT * FROM Message ORDER BY timestamp")
     suspend fun getAll(): List<Message>
 
     @Query("SELECT * FROM Message WHERE id = :id")

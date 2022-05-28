@@ -7,9 +7,9 @@
 
     <fragment
         android:id="@+id/notifyFragment"
-        android:name="com.thxbrop.message.presentation.notify.NotifyFragment"
+        android:name="com.thxbrop.message.presentation.conversation.ConversationFragment"
         android:label="NotifyFragment"
-        tools:layout="@layout/fragment_notify">
+        tools:layout="@layout/fragment_conversation">
         <action
             android:id="@+id/action_notifyFragment_to_messageFragment"
             app:destination="@id/messageFragment"
@@ -40,9 +40,9 @@
     </fragment>
     <fragment
         android:id="@+id/notifyDetailFragment"
-        android:name="com.thxbrop.message.presentation.notify_detail.NotifyDetailFragment"
+        android:name="com.thxbrop.message.presentation.con_detail.ConDetailFragment"
         android:label="NotifyDetailFragment"
-        tools:layout="@layout/fragment_notify_detail" />
+        tools:layout="@layout/fragment_conversation_detail" />
     <fragment
         android:id="@+id/loginFragment"
         android:name="com.thxbrop.message.presentation.login.LoginFragment"

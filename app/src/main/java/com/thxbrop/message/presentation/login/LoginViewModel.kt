@@ -3,33 +3,26 @@ package com.thxbrop.message.presentation.login
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.thxbrop.message.Resource
-import com.thxbrop.message.domain.repository.AccountRepository
-import com.thxbrop.message.extensions.asPhoneNumber
+import com.thxbrop.message.domain.model.Token
+import com.thxbrop.message.domain.repository.UserRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.channels.Channel
-import kotlinx.coroutines.flow.receiveAsFlow
+import kotlinx.coroutines.flow.MutableSharedFlow
+import kotlinx.coroutines.flow.asSharedFlow
+import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
 class LoginViewModel @Inject constructor(
-    private val accountRepository: AccountRepository
+    private val userRepository: UserRepository
 ) : ViewModel() {
-    private val _loginChanel = Channel<Resource<String>>()
-    val loginFlow = _loginChanel.receiveAsFlow()
+    private var _loginFlow = MutableSharedFlow<Resource<Token>>()
+    val loginFlow = _loginFlow.asSharedFlow()
 
-    fun loginByPhoneNumber(mobilePhoneNumber: String) {
+    fun login(email: String, password: String) {
         viewModelScope.launch {
-            with(_loginChanel) {
-                send(Resource.Loading)
-                try {
-                    val data = with(mobilePhoneNumber.asPhoneNumber()) {
-                        accountRepository.loginByMobilePhoneNumber(code, number)
-                    }
-                    send(Resource.Success(data))
-                } catch (e: Exception) {
-                    send(Resource.Failure(e))
-                }
+            userRepository.login(email, password).collectLatest {
+                _loginFlow.emit(it)
             }
         }
     }

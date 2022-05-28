@@ -1,10 +1,11 @@
 <resources>
     <string name="app_name">Message</string>
-    <string name="fragment_login_text_input_layout_hint">手机号码</string>
-    <string name="fragment_login_title">你的手机号码</string>
+    <string name="fragment_login_text_input_layout_hint">电子邮箱</string>
+    <string name="fragment_login_text_input_layout_hint2">密码</string>
+    <string name="fragment_login_title">你的电子邮箱</string>
     <string name="fragment_login_checkbox">同步通讯录</string>
     <string name="fragment_login_button">国家</string>
-    <string name="fragment_login_subtitle">请确认您的 <b>国家代码</b> 并输入您的手机号码</string>
+    <string name="fragment_login_subtitle">如果没有注册需要提供用户名</string>
     <string name="fragment_login_toolbar_cd_more">更多</string>
     <string name="fragment_login_floating">下一步</string>
     <string name="number_1">1</string>
@@ -35,7 +36,7 @@
     <string name="def_value">-</string>
     <string name="dialog_alert_negative">编辑</string>
     <string name="dialog_alert_positive">是</string>
-    <string name="dialog_alert_title">此手机号码正确吗?</string>
+    <string name="dialog_alert_title">此邮件地址正确吗?</string>
     <string name="fragment_code_title">查看您的短信消息</string>
     <string name="fragment_code_subtitle">We\'ve sent the code to your phone number.</string>
     <string name="fragment_login_illegal_phone">手机号码格式不正确</string>

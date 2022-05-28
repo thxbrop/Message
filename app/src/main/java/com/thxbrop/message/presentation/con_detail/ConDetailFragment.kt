@@ -1,4 +1,4 @@
-package com.thxbrop.message.presentation.notify_detail
+package com.thxbrop.message.presentation.con_detail
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -6,18 +6,18 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
-import com.thxbrop.message.databinding.FragmentNotifyDetailBinding
+import com.thxbrop.message.databinding.FragmentConversationDetailBinding
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class NotifyDetailFragment : Fragment() {
-    private lateinit var binding: FragmentNotifyDetailBinding
+class ConDetailFragment : Fragment() {
+    private lateinit var binding: FragmentConversationDetailBinding
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        binding = FragmentNotifyDetailBinding.inflate(inflater, container, false)
+        binding = FragmentConversationDetailBinding.inflate(inflater, container, false)
         return binding.root
     }
 
