@@ -28,23 +28,17 @@ import javax.inject.Singleton
 @InstallIn(SingletonComponent::class)
 object AppModule {
     @Singleton
-    private fun retrofitClient(): OkHttpClient = run {
+    private fun retrofitClient(): OkHttpClient {
         val builder = OkHttpClient.Builder()
-        var userId = ""
-        var token = ""
-        TokenManager.get { i, s ->
-            userId = (i ?: 0).toString()
-            token = s ?: ""
+        builder.addInterceptor { chain ->
+            val request = chain.request().newBuilder()
+            TokenManager.token?.let {
+                request.addHeader("token", it)
+                request.addHeader("userId", TokenManager.userId.toString())
+            }
+            chain.withReadTimeout(5, TimeUnit.SECONDS).proceed(request.build())
         }
-        builder.addInterceptor {
-            val request = it.request().newBuilder()
-                .addHeader("userId", userId)
-                .addHeader("token", token)
-                .build()
-            it.withReadTimeout(5, TimeUnit.SECONDS)
-                .proceed(request)
-        }
-        builder.build()
+        return builder.build()
     }
 
 

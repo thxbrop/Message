@@ -2,12 +2,16 @@ package com.thxbrop.message.components
 
 import android.app.Dialog
 import android.os.Bundle
+import android.text.Editable
 import android.view.LayoutInflater
 import android.view.View
 import android.widget.Button
 import android.widget.TextView
 import androidx.annotation.MainThread
 import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.core.widget.addTextChangedListener
+import com.google.android.material.textfield.TextInputEditText
+import com.google.android.material.textfield.TextInputLayout
 import com.thxbrop.message.R
 import com.thxbrop.message.extensions.dp
 
@@ -18,6 +22,8 @@ class AlertDialog(
     private var subtitle: TextView
     private var negative: Button
     private var positive: Button
+    private var editText: TextInputEditText
+    private var editLayout: TextInputLayout
 
     private var itemView: View =
         LayoutInflater.from(context).inflate(R.layout.dialog_alert, parentView, false)
@@ -27,6 +33,8 @@ class AlertDialog(
         subtitle = itemView.findViewById(R.id.dialog_alert_subtitle)
         negative = itemView.findViewById(R.id.dialog_alert_negative)
         positive = itemView.findViewById(R.id.dialog_alert_positive)
+        editText = itemView.findViewById(R.id.dialog_alert_text_input_edittext)
+        editLayout = itemView.findViewById(R.id.dialog_alert_text_input_layout)
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -75,5 +83,12 @@ class AlertDialog(
         positive.setOnClickListener {
             listener.invoke()
         }
+    }
+
+    @MainThread
+    fun setEdittext(hint: String, onTextChanged: (Editable?) -> Unit) {
+        editLayout.layoutParams.height = ConstraintLayout.LayoutParams.WRAP_CONTENT
+        editLayout.hint = hint
+        editText.addTextChangedListener(afterTextChanged = onTextChanged)
     }
 }

@@ -35,7 +35,6 @@
                 android:layout_gravity="end"
                 android:contentDescription="@string/fragment_notify_toolbar_cd_search"
                 android:src="@drawable/ic_baseline_search_24" />
-
         </Toolbar>
 
         <com.google.android.material.tabs.TabLayout

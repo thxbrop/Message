@@ -5,6 +5,8 @@ import com.thxbrop.message.domain.model.Conversation
 import kotlinx.coroutines.flow.Flow
 
 interface ConversationRepository {
-    suspend fun getConversationById(id: Int): Flow<Resource<Conversation>>
-    suspend fun getConversationsContains(userId: Int): Flow<Resource<List<Conversation>>>
+    fun getConversationsContainsFlow(): Flow<Resource<List<Conversation>>>
+    fun getConversationByIdFlow(): Flow<Resource<Conversation>>
+    suspend fun fetchConversationById(id: Int)
+    suspend fun fetchConversationsContains(userId: Int)
 }

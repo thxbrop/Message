@@ -10,19 +10,25 @@ import android.widget.Toast
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.findNavController
 import com.drake.brv.utils.linear
 import com.drake.brv.utils.models
 import com.drake.brv.utils.setup
 import com.thxbrop.message.R
-import com.thxbrop.message.Resource
+import com.thxbrop.message.data.local.TokenManager
 import com.thxbrop.message.databinding.FragmentConversationBinding
 import com.thxbrop.message.databinding.ItemConversationBinding
 import com.thxbrop.message.domain.model.Conversation
 import com.thxbrop.message.extensions.setTextColorResource
+import com.thxbrop.message.extensions.snack
 import com.thxbrop.message.presentation.PageController
 import com.thxbrop.message.presentation.message.MessageFragment
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.flow.collectLatest
+import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
 class ConversationFragment : Fragment(), PageController<Conversation> {
@@ -44,7 +50,7 @@ class ConversationFragment : Fragment(), PageController<Conversation> {
             fragmentNotifyToolbarTextSwitcher.setFactory {
                 TextView(requireContext()).also {
                     it.typeface = Typeface.DEFAULT_BOLD
-                    it.setTextColorResource(R.color.textColor)
+                    it.setTextColorResource(R.color.black)
                     it.textSize = 18f
                 }
             }
@@ -81,43 +87,36 @@ class ConversationFragment : Fragment(), PageController<Conversation> {
             }
         }
 
-
         with(viewModel) {
-            conversationLiveData.observe(viewLifecycleOwner) { resource ->
-                when (resource) {
-                    Resource.Loading -> {
-                        Toast.makeText(requireContext(), "Loading", Toast.LENGTH_SHORT).show()
-                    }
-                    is Resource.Success -> {
-                        submitList(resource.data)
-                    }
-                    is Resource.Failure -> {
-                        Toast.makeText(
-                            requireContext(),
-                            resource.message,
-                            Toast.LENGTH_SHORT
-                        ).show()
+            lifecycleScope.launch {
+                repeatOnLifecycle(Lifecycle.State.STARTED) {
+                    uiState.collectLatest { state ->
+                        submitList(state.conversations)
+                        if (state.loading) {
+                            snack("LOADING")
+                        }
+                        state.errorMsg?.let(::snack)
                     }
                 }
             }
         }
+
         setTitle()
+        if (TokenManager.hasCached) {
+            viewModel.getConversations(TokenManager.userId)
+            // TODO
+        }
     }
 
-    override fun animateTitle(title: String) {
+    override fun animateTitle(title: String) =
         binding.fragmentNotifyToolbarTextSwitcher.setText(title)
-    }
 
-    override fun setTitle(title: String) {
+
+    override fun setTitle(title: String) =
         binding.fragmentNotifyToolbarTextSwitcher.setCurrentText(title)
-    }
+
 
     override fun submitList(list: List<Conversation>) {
         binding.fragmentNotifyRecyclerview.models = list
-    }
-
-    override fun onStart() {
-        super.onStart()
-        viewModel.getConversations()
     }
 }

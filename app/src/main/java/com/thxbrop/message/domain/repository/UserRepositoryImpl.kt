@@ -6,7 +6,7 @@ import com.thxbrop.message.data.local.dao.UserDao
 import com.thxbrop.message.data.remote.UserService
 import com.thxbrop.message.domain.model.Token
 import com.thxbrop.message.domain.model.User
-import com.thxbrop.message.extensions.sandBox
+import com.thxbrop.message.sandbox
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 
@@ -15,14 +15,14 @@ class UserRepositoryImpl(
 ) : UserRepository {
     override suspend fun getById(id: Int): Flow<Resource<User>> = flow {
         emit(Resource.Loading)
-        sandBox {
+        sandbox {
             val result = userService.getById(id)
-            result.data?.let { user ->
+            result.handleData { user ->
                 userDao.insert(user)
                 userDao.getById(id)?.let { emit(Resource.Success(it)) }
             }
-            result.message?.let {
-                emit(Resource.Failure(it))
+            result.handleError { code, message ->
+                emit(Resource.Failure(code, message))
             }
         }
 
@@ -30,14 +30,15 @@ class UserRepositoryImpl(
 
     override suspend fun login(email: String, password: String): Flow<Resource<Token>> = flow {
         emit(Resource.Loading)
-        sandBox {
+        sandbox {
             val result = userService.login(email, password)
-            result.data?.let { token ->
-                TokenManager.put(token.userId, token.token)
+            result.handleData { token ->
+                TokenManager.setToken(token.token)
+                TokenManager.setUserId(token.userId)
                 emit(Resource.Success(token))
             }
-            result.message?.let {
-                emit(Resource.Failure(it))
+            result.handleError { code, message ->
+                emit(Resource.Failure(code, message))
             }
         }
 
@@ -47,13 +48,13 @@ class UserRepositoryImpl(
         email: String, password: String, username: String
     ): Flow<Resource<User>> = flow {
         emit(Resource.Loading)
-        sandBox {
+        sandbox {
             val result = userService.register(email, username, password)
-            result.data?.let { user ->
+            result.handleData { user ->
                 emit(Resource.Success(user))
             }
-            result.message?.let {
-                emit(Resource.Failure(it))
+            result.handleError { code, message ->
+                emit(Resource.Failure(code, message))
             }
         }
     }

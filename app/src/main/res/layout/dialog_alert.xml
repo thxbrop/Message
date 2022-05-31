@@ -48,17 +48,34 @@
         app:layout_constraintTop_toBottomOf="@id/dialog_alert_title"
         app:layout_constraintVertical_bias="0" />
 
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/dialog_alert_text_input_layout"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="@dimen/margin_s"
+        app:boxBackgroundColor="@color/surface"
+        app:layout_constraintEnd_toEndOf="@id/dialog_alert_subtitle"
+        app:layout_constraintStart_toStartOf="@id/dialog_alert_subtitle"
+        app:layout_constraintTop_toBottomOf="@id/dialog_alert_subtitle">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/dialog_alert_text_input_edittext"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+    </com.google.android.material.textfield.TextInputLayout>
+
     <Button
         android:id="@+id/dialog_alert_negative"
         style="@style/Widget.MaterialComponents.Button.TextButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/margin_m"
-        android:text="@string/dialog_alert_negative"
+        android:text="@string/dialog_alert_make_sure_info_negative"
         app:layout_constraintEnd_toEndOf="@id/dialog_alert_card"
         app:layout_constraintHorizontal_bias="0"
         app:layout_constraintStart_toStartOf="@id/dialog_alert_card"
-        app:layout_constraintTop_toBottomOf="@id/dialog_alert_subtitle" />
+        app:layout_constraintTop_toBottomOf="@id/dialog_alert_text_input_layout" />
 
     <Button
         android:id="@+id/dialog_alert_positive"
@@ -66,9 +83,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/margin_m"
-        android:text="@string/dialog_alert_positive"
+        android:text="@string/dialog_alert_make_sure_info_positive"
         app:layout_constraintEnd_toEndOf="@id/dialog_alert_card"
         app:layout_constraintHorizontal_bias="1"
         app:layout_constraintStart_toStartOf="@id/dialog_alert_card"
-        app:layout_constraintTop_toBottomOf="@id/dialog_alert_subtitle" />
+        app:layout_constraintTop_toBottomOf="@id/dialog_alert_text_input_layout" />
 </androidx.constraintlayout.widget.ConstraintLayout>

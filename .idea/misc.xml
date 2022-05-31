@@ -16,8 +16,9 @@
         <entry key="..\:/Message/app/src/main/res/layout/fragment_calling.xml" value="0.26875" />
         <entry key="..\:/Message/app/src/main/res/layout/fragment_code.xml" value="0.1" />
         <entry key="..\:/Message/app/src/main/res/layout/fragment_contact.xml" value="0.26875" />
+        <entry key="..\:/Message/app/src/main/res/layout/fragment_conversation.xml" value="0.26461538461538464" />
         <entry key="..\:/Message/app/src/main/res/layout/fragment_conversation_detail.xml" value="0.375" />
-        <entry key="..\:/Message/app/src/main/res/layout/fragment_login.xml" value="0.25" />
+        <entry key="..\:/Message/app/src/main/res/layout/fragment_login.xml" value="0.335" />
         <entry key="..\:/Message/app/src/main/res/layout/fragment_message.xml" value="0.25" />
         <entry key="..\:/Message/app/src/main/res/layout/fragment_notify.xml" value="0.125" />
         <entry key="..\:/Message/app/src/main/res/layout/fragment_notify_detail.xml" value="0.25" />

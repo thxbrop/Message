@@ -35,6 +35,17 @@
 
     </com.google.android.material.appbar.AppBarLayout>
 
+    <com.airbnb.lottie.LottieAnimationView
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toTopOf="@id/fragment_login_title"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/fragment_login_appbar_layout"
+        app:lottie_autoPlay="true"
+        app:lottie_loop="true"
+        app:lottie_rawRes="@raw/sms" />
+
     <TextView
         android:id="@+id/fragment_login_title"
         android:layout_width="wrap_content"
@@ -84,8 +95,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:imeOptions="actionNext"
-            android:inputType="text"
-            android:textCursorDrawable="@drawable/widget_transparent_text_cursor" />
+            android:inputType="text" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
@@ -106,8 +116,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:imeOptions="actionDone"
-            android:inputType="text"
-            android:textCursorDrawable="@drawable/widget_transparent_text_cursor" />
+            android:inputType="text" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.checkbox.MaterialCheckBox
@@ -121,22 +130,33 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="@id/fragment_login_text_input_layout"
         app:layout_constraintHorizontal_bias="0"
+        app:layout_constraintVertical_bias="0.65"
         app:layout_constraintStart_toStartOf="@id/fragment_login_text_input_layout"
         app:layout_constraintTop_toBottomOf="@id/fragment_login_appbar_layout" />
+
+
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
+        android:id="@+id/fragment_login_coordinator"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/fragment_login_floating"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/margin_l"
         android:contentDescription="@string/fragment_login_floating"
         android:src="@drawable/ic_baseline_arrow_forward_24"
         app:borderWidth="0dp"
         app:elevation="0dp"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/fragment_login_coordinator"
         app:layout_constraintEnd_toEndOf="@id/fragment_login_text_input_layout"
         app:layout_constraintHorizontal_bias="1"
         app:layout_constraintStart_toStartOf="@id/fragment_login_text_input_layout"
-        app:layout_constraintTop_toBottomOf="@id/fragment_login_checkbox"
-        app:layout_constraintVertical_bias="0" />
+        app:layout_constraintTop_toBottomOf="@+id/fragment_login_checkbox"
+        app:layout_constraintVertical_bias="1" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
